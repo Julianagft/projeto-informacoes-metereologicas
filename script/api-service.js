@@ -1,15 +1,13 @@
 // COMUNICAÇÃO COM A API
 const parseString = require('xml2js').parseString;
 
+const urlTempo = `http://servicos.cptec.inpe.br/XML/cidade/?id=${encodeURIComponent(cidadeId)}/previsao.xml`;
 
-
-const urlTempo = `http://servicos.cptec.inpe.br/XML/cidade/?id=${encodeURIComponent(codigoLocalidade)}/previsao.xml`;
-
-const ulrLocalidade = `http://servicos.cptec.inpe.br/XML/listaCidades?city=${encodeURIComponent(cidade)}`;
+const urlLocalidade = `http://servicos.cptec.inpe.br/XML/listaCidades?city=${encodeURIComponent(cidade.nome)}`;
 
 const buscaLocalidade = async () => {
     try {
-        const resposta = await fetch(ulrLocalidade);
+        const resposta = await fetch(urlLocalidade);
         if (resposta.ok) {
             const data = await resposta.json();
             return data
@@ -22,18 +20,16 @@ const buscaLocalidade = async () => {
     }
 }
 
-const previsaoCapitais = async () => {
+const previsaoLocalidade = async () => {
     try {
         const resposta = await fetch(urlTempo);
         if (resposta.ok) {
             const data = await resposta.json();
             return data;
         } else {
-            window.alert('Erro ao obter dados! Verifique se digitou corretamente e tente novamente.')
             console.error('Erro ao obter dados:', resposta.statusText);
         }
     } catch (erro) {
-        window.alert('Erro na requisição. Tente novamente em alguns minutos!');
         console.error('Erro na requisição: ', erro)
      }
 }
@@ -52,5 +48,6 @@ const parseXml = (xml) => {
 
 
 export const service = {
-    previsaoCapitais
+    previsaoLocalidade,
+    buscaLocalidade
 }
