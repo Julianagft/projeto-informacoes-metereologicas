@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tempo nas Capitais</title>
+    <link rel="stylesheet" href="estilos/style.css">
+    <link rel="stylesheet" href="estilos/media-queries.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <section id="container">
+            <div id="imagem">
+
+            </div>
+
+            <div id="dados">
+                <h1>Condições meteorológicas atuais das capitais</h1>
+                <p>Seja bem-vindo(a). Digite o nome do município desejado e descubra suas condições metereológicas atuais.</p>
+                <form action="" method="get" autocomplete="on">
+                    <div class="campo">
+                        <span class="material-icons">location_city</span>
+                        <input type="text" name="cidade" id="icidade" placeholder="Nome da cidade" required maxlength="30">
+                        <label for="icidade">Cidade</label>
+                    </div>
+                    <input type="submit" value="Verificar">
+                </form>
+
+                <div class="campo">
+                        
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <h2>${municipio.nome}- ${uf.uf}</h2>
+    <p>A temperatura é de  </p>
+
+    <script src="./script/meteorologia-controller.js"></script>
+</body>
+</html>
