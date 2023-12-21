@@ -12,22 +12,25 @@ async function BuscarCidades() {
     const inputMunicipio = document.querySelector('#icidade');
     const municipio = inputMunicipio.value; 
     const resp = document.querySelector('#resp');
+    
 
     try {
                 
         // Verifica se o município foi encontrado
         const dadosMunicipio = await service.buscaLocalidade(municipio);
+        console.log(dadosMunicipio)
 
         if(dadosMunicipio){
+
             const cidadeId = dadosMunicipio.id
             // Obtém os dados da previsão do serviço usando o ID da cidade
-            const dadosPrevisao = await service.previsaoLocalidade(cidadeId);
+            const resposta = await service.previsaoLocalidade(cidadeId);
+            const dadosPrevisao = resposta.find((previsao)=> previsao.dia == data())        
 
-            resp.innerHTML += `<h2>${municipio} - ${cidadeEncontrada.uf}</h2>
-                    <p><strong>ID do Município:</strong> ${cidadeId}</p>
-                    <p><strong>Temperatura Máxima:</strong> ${dadosPrevisao[cidadeId].dia.previsao.maxima}</p>
-                    <p><strong>Temperatura Mínima:</strong> ${dadosPrevisao[cidadeId].dia.previsao.minima}</p>
-                    <p><strong>Valor máximo de radiação revisado para hoje:</strong> ${dadosPrevisao[cidadeId].previsao.dia.iuv}</p>`;
+            resp.innerHTML = `<h2>${municipio} - ${dadosMunicipio.uf}</h2>
+                    <p><strong>Temperatura Máxima:</strong> ${dadosPrevisao.maxima}</p>
+                    <p><strong>Temperatura Mínima:</strong> ${dadosPrevisao.minima}</p>
+                    <p><strong>Valor máximo de radiação revisado para hoje:</strong> ${dadosPrevisao.iuv}</p>`;
 
         } else {
             resp.innerHTML = `<p>Município não encontrado.</p>`;
@@ -39,3 +42,25 @@ async function BuscarCidades() {
     } 
 }
 
+function data () {
+    // Obter a data atual
+let dataAtual = new Date();
+
+// Adicionar um dia para obter a data de amanhã
+dataAtual.setDate(dataAtual.getDate() + 1);
+
+// Obter os componentes da data
+let diaAmanha = dataAtual.getDate();
+let mesAmanha = dataAtual.getMonth() + 1; // Lembrando que o mês começa do zero
+let anoAmanha = dataAtual.getFullYear();
+
+// Adicionar zeros à esquerda para garantir dois dígitos para dia e mês
+diaAmanha = diaAmanha < 10 ? `0${diaAmanha}` : diaAmanha;
+mesAmanha = mesAmanha < 10 ? `0${mesAmanha}` : mesAmanha;
+
+// Formatar a data de amanhã no formato desejado
+let dataAmanhaFormatada = `${anoAmanha}/${mesAmanha}/${diaAmanha}`;
+
+return dataAmanhaFormatada;
+
+}

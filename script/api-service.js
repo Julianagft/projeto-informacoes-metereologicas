@@ -1,35 +1,19 @@
 // COMUNICAÇÃO COM A API
-import fetch from 'node-fetch';
-import { parseString } from 'xml2js';
+import {conversor} from "./xml-conversor.js"
 
-const urlTempo = `http://servicos.cptec.inpe.br/XML/cidade/?id=${encodeURIComponent(cidadeId)}/previsao.xml`;
+const urlTempo = (cidadeId) => `http://servicos.cptec.inpe.br/XML/cidade/${encodeURIComponent(cidadeId)}/previsao.xml`; //request parameter
 
-const urlLocalidade = `http://servicos.cptec.inpe.br/XML/listaCidades?city=${encodeURIComponent(cidade.nome)}`;
-
-// Função para converter XML em objeto JavaScript
-const parseXml = (xml) => {
-    return new Promise((resolve, reject) => {
-      parseString(xml, (err, result) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      });
-    });
-  };
+const urlLocalidade = (cidadeNome) => `http://servicos.cptec.inpe.br/XML/listaCidades?city=${encodeURIComponent(cidadeNome)}`;
 
 
 const buscaLocalidade = async (municipio) => {
     try {
-        const resposta = await fetch(urlLocalidade);
-        console.log('Resposta da requisição:', resposta);
+        const resposta = await fetch(urlLocalidade(municipio));
         if (resposta.ok) {
             const data = await resposta.text();
-            const resultado = await parseXml(data);
-            console.log('Resultado da busca de localidade:', JSON.stringify(resultado, null, 2));
-            console.log('Resultado da previsão de localidade:', JSON.stringify(resultado, null, 2));
-            return resultado.cidades.cidade;
+            const resultado = conversor.parseXml(data);
+            console.log(resultado)
+            return resultado.cidade[0];
         } else {
             console.error('Erro na requisição: ',resposta.statusText);
             return null
@@ -42,11 +26,11 @@ const buscaLocalidade = async (municipio) => {
 
 const previsaoLocalidade = async (cidadeId) => {
     try {
-        const resposta = await fetch(urlTempo);
+        const resposta = await fetch(urlTempo(cidadeId));
         if (resposta.ok) {
             const data = await resposta.text();
-            const resultado = await parseXml(data)
-            return resultado;
+            const resultado = await conversor.parseXml(data)
+            return resultado.previsao;
         } else {
             console.error('Erro ao obter dados:', resposta.statusText);
         }
