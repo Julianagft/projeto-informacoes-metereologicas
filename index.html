@@ -18,16 +18,16 @@
             <div id="dados">
                 <h1>Condições meteorológicas atuais das capitais</h1>
                 <p>Seja bem-vindo(a). Digite o nome do município desejado e descubra suas condições metereológicas atuais.</p>
-                <form action="" method="get" autocomplete="on">
+                <form id="formCidade" action="" method="get" autocomplete="on">
                     <div class="campo">
                         <span class="material-icons">location_city</span>
                         <input type="text" name="cidade" id="icidade" placeholder="Nome da cidade" required maxlength="30">
                         <label for="icidade">Cidade</label>
                     </div>
-                    <input type="submit" value="Verificar">
+                    <input id="verificar" type="submit" value="Verificar">
                 </form>
 
-                <div class="campo">
+                <div class="campo" id="resp">
                         
                 </div>
             </div>
