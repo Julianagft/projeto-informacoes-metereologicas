@@ -1,7 +1,9 @@
-# projeto-login
+# projeto-informações-metereológicas.
 
-Tela de Login feita para mostrar o uso de Media Queries com diferentes tamanhos de tela!
+A intenção desse mini projeto era criar uma página que desse a previsão metereológica do dia seguinte para a cidade ou município escolhida pelo usuário. 
 
-Para ver como ficou a página acesse o link: https://julianagft.github.io/projeto-login/
+O projeto ainda apresenta algumas falhas pontuais que pretendo corrigir com o tempo, mas no geral funciona da maneira desejada. 
 
-![Tela de Login](https://github.com/Julianagft/projeto-login/blob/main/login.png)
+
+
+![Previsão Metereológica](https://github.com/Julianagft/projeto-informacoes-metereologicas/blob/main/readme.png)
