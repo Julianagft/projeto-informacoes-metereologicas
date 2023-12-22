@@ -3,18 +3,18 @@
 /* Media Queries */
 
 :root{
-    --verde-escuro: #00AD76;
-    --verde-claro: #72C674;
-    --amarelo-queimado:#FFD034;
-    --goiaba:#FF7C5B;
-    --azul-claro:#009BCE;
+    --azul: #7AACBF;
+    --azul-claro:#A2DCF2 ;
+    --rosa-pink:#F266A7;
+    --rosa-velho: #F27781;
+    --goiaba:#D93644;
 }
 
 /* Versão Tablet*/
 
 @media screen and (min-width: 760px) and (max-width: 992px) {
     body{
-        background-image: linear-gradient(to bottom, var(--azul-claro), var(--verde-claro), var(--verde-escuro));
+        background-image: linear-gradient(to bottom, var(--rosa-velho), var(--azul-claro));
         background-repeat: no-repeat;
         background-size: contain;
     }
@@ -26,12 +26,22 @@
     }
 
     #imagem{
+        background: url(../imagens/termometro.jpg) no-repeat;
+        background-position:left center;
         width: 35%;
         height: 100%;
     }
 
     #dados{
         width: 65%;
+    }
+
+    #dados > p{
+        font-size: 1em;
+    }
+
+    #resp > p {
+        font-size: 1em;
     }
 
     form{
@@ -43,7 +53,7 @@
 
 @media screen and (min-width: 992px){
     body{
-        background-image: linear-gradient(to bottom, var(--azul-claro), var(--verde-escuro), var(--goiaba));
+        background-image: linear-gradient(to bottom, var(--goiaba), var(--azul-claro), var(--azul));
         background-repeat: no-repeat;
         background-size: contain;
     }
@@ -75,5 +85,8 @@
         margin-top: 10px;
     }
     
+    #resp > p {
+        font-size: 1.2em;
+    }
 
 }

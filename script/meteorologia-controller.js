@@ -27,10 +27,11 @@ async function BuscarCidades() {
             const resposta = await service.previsaoLocalidade(cidadeId);
             const dadosPrevisao = resposta.find((previsao)=> previsao.dia == data())        
 
-            resp.innerHTML = `<h2>${municipio} - ${dadosMunicipio.uf}</h2>
-                    <p><strong>Temperatura Máxima:</strong> ${dadosPrevisao.maxima}</p>
-                    <p><strong>Temperatura Mínima:</strong> ${dadosPrevisao.minima}</p>
-                    <p><strong>Valor máximo de radiação revisado para hoje:</strong> ${dadosPrevisao.iuv}</p>`;
+            resp.innerHTML = `<h3>${municipio} - ${dadosMunicipio.uf}</h3>
+                    <p> Previsão do tempo para amanhã, ${data()}
+                    <p><strong>Temperatura Máxima:</strong> ${dadosPrevisao.maxima}°C</p>
+                    <p><strong>Temperatura Mínima:</strong> ${dadosPrevisao.minima}°C</p>
+                    <p><strong>Valor máximo de radiação ultravioleta:</strong> ${dadosPrevisao.iuv} iuv</p>`;
 
         } else {
             resp.innerHTML = `<p>Município não encontrado.</p>`;
@@ -59,8 +60,7 @@ diaAmanha = diaAmanha < 10 ? `0${diaAmanha}` : diaAmanha;
 mesAmanha = mesAmanha < 10 ? `0${mesAmanha}` : mesAmanha;
 
 // Formatar a data de amanhã no formato desejado
-let dataAmanhaFormatada = `${anoAmanha}/${mesAmanha}/${diaAmanha}`;
+let dataAmanhaFormatada = `${anoAmanha}-${mesAmanha}-${diaAmanha}`;
 
 return dataAmanhaFormatada;
-
 }

@@ -3,11 +3,11 @@
 /* PALETA DE CORES */
 
 :root{
-    --verde-escuro: #00AD76;
-    --verde-claro: #72C674;
-    --amarelo-queimado:#FFD034;
-    --goiaba:#FF7C5B;
-    --azul-claro:#009BCE;
+    --azul: #7AACBF;
+    --azul-claro:#A2DCF2 ;
+    --rosa-pink:#F266A7;
+    --rosa-velho: #F27781;
+    --goiaba:#D93644;
 }
 
 /* CONF GERAIS */
@@ -20,7 +20,7 @@
 }
 
 body, html {
-    background-image: linear-gradient(to bottom, var(--azul-claro), var(--verde-escuro));
+    background-image: linear-gradient(to bottom, var(--azul), var(--azul-claro));
     background-repeat: no-repeat;
     height: 100%;
     width: 100vw;
@@ -44,8 +44,8 @@ section#container {
     
     background-color: white;
     box-shadow:0px 0px 10px rgba(0, 0, 0, 0.450) ;
-    width: 300px;
-    height: 65vh;
+    width: 400px;
+    height: 70vh;
     border-radius: 20px;
     overflow: hidden;
 
@@ -54,7 +54,7 @@ section#container {
 }
  
 #imagem{
-    background: url(../imagens/pexels-suzy-hazelwood-1629236.jpg) no-repeat ;
+    background: url(../imagens/termometro.jpg) no-repeat ;
     background-size: cover;
     height: 200px;
 }
@@ -71,12 +71,12 @@ section#container {
 #dados > h1{
     text-align: center;
     margin-top: 10px;
-    
+    color: var(--goiaba);
 
 }
 
 #dados > p{
-    font-size: 0.8em;
+    font-size: 0.9em;
     text-align: justify;
     margin: 10px;
 }
@@ -84,7 +84,7 @@ section#container {
 form input[type=text] {
     border-radius: 5px;
     padding: 3px;
-    border: 2px solid var(--amarelo-queimado);
+    border: 2px solid var(--goiaba);
 }
 
 form input[type=submit]{
@@ -92,17 +92,17 @@ form input[type=submit]{
     margin: auto;
     font-size: 1em;
     font-weight: bold;
-    width: 90%;
+    width: 70%;
     height: 40px;
     color: white;
-    background-color: var(--amarelo-queimado);
+    background-color: var(--goiaba);
     border-radius: 5px;
     border: none;
     margin-top: 20px;
 }
 
 form input[type=submit]:hover{
-    background-color:#ffd034c4;
+    background-color: var(--azul-claro);
     font-weight: bolder;
     cursor: pointer;
     transition: 0.2s;
@@ -116,14 +116,42 @@ form > a{
 }
 
 form span{
-    background-color: var(--amarelo-queimado);
+    background-color: var(--goiaba);
     width: 30px;
     padding: 2px;
     border-radius: 5px;
     font-size: 0.5em;
-    transform: translate(1px, 6px); /*Toda animação ou transição deve ser a última linha do código*/
+    transform: translate(-1px, 6px); /*Toda animação ou transição deve ser a última linha do código*/
 }
 
 form i{
     transform: translate(5px, 4.5px); 
+}
+
+#resp {
+    margin-top: 20px;
+}
+
+#resp > p {
+    font-size: 0.9em;
+}
+
+#resp h3, strong {
+    color: var(--goiaba);
+}
+
+footer, a {
+    margin-top: 40px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--goiaba);
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    font-weight: normal;
 }
