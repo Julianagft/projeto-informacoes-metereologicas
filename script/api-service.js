@@ -1,9 +1,9 @@
 // COMUNICAÇÃO COM A API
 import {conversor} from "./xml-conversor.js"
 
-const urlTempo = (cidadeId) => `http://servicos.cptec.inpe.br/XML/cidade/${encodeURIComponent(cidadeId)}/previsao.xml`; //request parameter
+const urlTempo = (cidadeId) => `http://servicos.cptec.inpe.br/XML/cidade/${cidadeId}/previsao.xml`; //request parameter
 
-const urlLocalidade = (cidadeNome) => `http://servicos.cptec.inpe.br/XML/listaCidades?city=${encodeURIComponent(cidadeNome)}`;
+const urlLocalidade = (cidadeNome) => `http://servicos.cptec.inpe.br/XML/listaCidades?city=${cidadeNome}`;
 
 
 const buscaLocalidade = async (municipio) => {
@@ -26,6 +26,7 @@ const buscaLocalidade = async (municipio) => {
 
 const previsaoLocalidade = async (cidadeId) => {
     try {
+        console.log(cidadeId)
         const resposta = await fetch(urlTempo(cidadeId));
         if (resposta.ok) {
             const data = await resposta.text();
