@@ -1,47 +1,27 @@
 // COMUNICAÇÃO COM A API
-import {conversor} from "./xml-conversor.js"
 
-const urlTempo = (cidadeId) => `http://servicos.cptec.inpe.br/XML/cidade/${cidadeId}/previsao.xml`; //request parameter
+const APIKey = '412f6fc81b4ae1fc4163434f97f003b0';
 
-const urlLocalidade = (cidadeNome) => `http://servicos.cptec.inpe.br/XML/listaCidades?city=${cidadeNome}`;
+// Função para gerar a URL de previsão do tempo
+const urlPrevisao = (cidadeNome) => `https://api.openweathermap.org/data/2.5/weather?q=${cidadeNome}&units=metric&appid=${APIKey}`;
 
-
-const buscaLocalidade = async (municipio) => {
+// Função para buscar a previsão do tempo de uma localidade
+const previsaoLocalidade = async (municipio) => {
     try {
-        const resposta = await fetch(urlLocalidade(municipio));
+        const resposta = await fetch(urlPrevisao(municipio));
         if (resposta.ok) {
-            const data = await resposta.text();
-            const resultado = conversor.parseXml(data);
-            console.log(resultado)
-            return resultado.cidade[0];
-        } else {
-            console.error('Erro na requisição: ',resposta.statusText);
-            return null
-        }
-    } catch(erro) {
-        console.error('Erro na requisição: ', erro)
-        return null;
-    }
-}
-
-const previsaoLocalidade = async (cidadeId) => {
-    try {
-        console.log(cidadeId)
-        const resposta = await fetch(urlTempo(cidadeId));
-        if (resposta.ok) {
-            const data = await resposta.text();
-            const resultado = await conversor.parseXml(data)
-            return resultado.previsao;
+            const data = await resposta.json();
+            return data;
         } else {
             console.error('Erro ao obter dados:', resposta.statusText);
+            return null;
         }
     } catch (erro) {
         console.error('Erro na requisição: ', erro);
         return null;
-     }
+    }
 }
 
 export const service = {
-    previsaoLocalidade,
-    buscaLocalidade
+    previsaoLocalidade
 }
