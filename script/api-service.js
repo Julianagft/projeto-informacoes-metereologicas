@@ -1,47 +1,23 @@
-// COMUNICAÇÃO COM A API
-import {conversor} from "./xml-conversor.js"
+const apiKey = "SUA_API_KEY_AQUI"; // Substitua com sua chave de API
 
-const urlTempo = (cidadeId) => `http://servicos.cptec.inpe.br/XML/cidade/${cidadeId}/previsao.xml`; //request parameter
+const urlPrevisao = (cidadeNome) => `https://api.openweathermap.org/data/2.5/weather?q=${cidadeNome}&units=metric&appid=${apiKey}`;
 
-const urlLocalidade = (cidadeNome) => `http://servicos.cptec.inpe.br/XML/listaCidades?city=${cidadeNome}`;
-
-
-const buscaLocalidade = async (municipio) => {
+const previsaoLocalidade = async (municipio) => {
     try {
-        const resposta = await fetch(urlLocalidade(municipio));
+        const resposta = await fetch(urlPrevisao(municipio));
         if (resposta.ok) {
-            const data = await resposta.text();
-            const resultado = conversor.parseXml(data);
-            console.log(resultado)
-            return resultado.cidade[0];
-        } else {
-            console.error('Erro na requisição: ',resposta.statusText);
-            return null
-        }
-    } catch(erro) {
-        console.error('Erro na requisição: ', erro)
-        return null;
-    }
-}
-
-const previsaoLocalidade = async (cidadeId) => {
-    try {
-        console.log(cidadeId)
-        const resposta = await fetch(urlTempo(cidadeId));
-        if (resposta.ok) {
-            const data = await resposta.text();
-            const resultado = await conversor.parseXml(data)
-            return resultado.previsao;
+            const data = await resposta.json();
+            console.log(data);
+            return data;
         } else {
             console.error('Erro ao obter dados:', resposta.statusText);
         }
     } catch (erro) {
         console.error('Erro na requisição: ', erro);
         return null;
-     }
+    }
 }
 
 export const service = {
-    previsaoLocalidade,
-    buscaLocalidade
+    previsaoLocalidade
 }
